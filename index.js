@@ -9,12 +9,7 @@ const items = [
   { id: 8, name: "sourdough loaf", price: 5.5, categoryId: 4, inventory: 100 },
 ];
 
-const carts = [
-  { id: 1, name: "apple", price: 1.75, categoryId: 1, quantity: 1 },
-  { id: 5, name: "cucumber", price: 1.0, categoryId: 2, quantity: 1 },
-  { id: 6, name: "milk", price: 5.75, categoryId: 3, quantity: 1 },
-  { id: 8, name: "sourdough loaf", price: 5.5, categoryId: 4, quantity: 1 },
-];
+const carts = [];
 
 // ------------------ Complete the functions written below ------------------------------ //
 
@@ -31,7 +26,7 @@ function logItemNames() {
  */
 function findItemById(id) {
   // TODO: Use the .find() method to return the item who's id matches the passed in id
-  return items.find((item) => item.id === id);
+  return items.find((item) => item.id == id);
 }
 
 /**
@@ -69,8 +64,7 @@ function calculateAllInventoryPrice() {
  */
 function getItemPriceByName(name) {
   // TODO: Use your knowledge of objects and arrays to get the price of the item passed in
-  let item = items.find((item) => item.name === name);
-  return (item = item.price);
+  return items.find((item) => item.name === name);
 }
 
 /**
@@ -79,17 +73,13 @@ function getItemPriceByName(name) {
  */
 function filterItemsByCategoryId(categoryId) {
   // TODO: use the .filter() method to filter out all items which don't belong the passed in category
-  let item = items.filter((item) => item.categoryId === +categoryId);
-  return item;
+  return items.filter((item) => item.categoryId == categoryId);
 }
 
 function logCartItems() {
   // TODO: Loop through your cart and use the indexes to log the names of all items in your cart
-  // for (let i = 0; i < cart.length; i++) {
-  //   console.log(cart[i].name);
-  // }
   carts.forEach((item) => {
-    console.log(item.name);
+    console.log(findItemById(item).name);
   });
 }
 
@@ -98,24 +88,18 @@ function logCartItems() {
  */
 function calculateTotalCartPrice() {
   // TODO: Loop through your cart and return the total price of all items in your cart
-  // let total = 0;
-
-  // for (let i = 0; i < carts.length; i++) {
-  //   total += carts[i].price * carts[i].quantity;
-  // }
-  // return total;
-
-  let totalPrice = 0;
-  carts.map((item) => {
-    totalPrice += item.price * item.quantity;
+  let total = 0;
+  carts.forEach((element) => {
+    total += findItemById(element).price;
   });
+  return total;
 }
 
 // --------------------- DO NOT CHANGE THE CODE BELOW ------------------------ //
 
 const ids = prompt(
   "enter numbers separated by commas for the ids of the items you want to add to your cart",
-  "1, 3, 5"
+  "1, 3, 5, 5, 6, 7"
 );
 // Split the string of numbers into an array of strings.
 const idArr = ids.split(", ");
@@ -148,7 +132,10 @@ const itemToFind = prompt(
   "Enter the name of an item to find the price of",
   "apple"
 );
-console.log(`The price of ${itemToFind} is: `, getItemPriceByName(itemToFind));
+console.log(
+  `The price of ${itemToFind} is: `,
+  getItemPriceByName(itemToFind).price
+);
 
 const categoryId = prompt(
   "Enter a number between 1-4 to filter only items with that categoryId",

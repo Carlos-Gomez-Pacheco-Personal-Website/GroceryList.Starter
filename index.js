@@ -9,7 +9,7 @@ const items = [
   { id: 8, name: "sourdough loaf", price: 5.5, categoryId: 4, inventory: 100 },
 ];
 
-const cart = [
+const carts = [
   { id: 1, name: "apple", price: 1.75, categoryId: 1, quantity: 1 },
   { id: 5, name: "cucumber", price: 1.0, categoryId: 2, quantity: 1 },
   { id: 6, name: "milk", price: 5.75, categoryId: 3, quantity: 1 },
@@ -85,9 +85,12 @@ function filterItemsByCategoryId(categoryId) {
 
 function logCartItems() {
   // TODO: Loop through your cart and use the indexes to log the names of all items in your cart
-  for (let i = 0; i < cart.length; i++) {
-    console.log(cart[i].name);
-  }
+  // for (let i = 0; i < cart.length; i++) {
+  //   console.log(cart[i].name);
+  // }
+  carts.forEach((item) => {
+    console.log(item.name);
+  });
 }
 
 /**
@@ -95,12 +98,17 @@ function logCartItems() {
  */
 function calculateTotalCartPrice() {
   // TODO: Loop through your cart and return the total price of all items in your cart
-  let total = 0;
+  // let total = 0;
 
-  for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price * cart[i].quantity;
-  }
-  return total;
+  // for (let i = 0; i < carts.length; i++) {
+  //   total += carts[i].price * carts[i].quantity;
+  // }
+  // return total;
+
+  let totalPrice = 0;
+  carts.map((item) => {
+    totalPrice += item.price * item.quantity;
+  });
 }
 
 // --------------------- DO NOT CHANGE THE CODE BELOW ------------------------ //
@@ -112,7 +120,7 @@ const ids = prompt(
 // Split the string of numbers into an array of strings.
 const idArr = ids.split(", ");
 
-idArr.forEach((id) => cart.push(id));
+idArr.forEach((id) => carts.push(id));
 console.log(`The names of all the items are: `);
 logItemNames();
 const itemId = prompt("enter the id of an item you are trying to find", "1");
